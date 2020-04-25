@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Change zsh theme
+      lineinfile:
+        path: ~/.zshrc
+        regexp: '^(ZSH_THEME="robbyrussell")'
+        line: '#\1 \nZSH_THEME="powerlevel9k/powerlevel9k"'
+        backrefs: yes
+
+    - name: Change zsh to case_sensitive
+      lineinfile:
+        path: ~/.zshrc
+        regexp: '^# CASE_SENSITIVE=(.*)'
+        line: 'CASE_SENSITIVE=\1'
+        backrefs: yes
+
+    - name: Copy bash_aliases
+      copy:
+        src: config/.bash_aliases
+        dest: ~/.bash_aliases
+
+    - name: Add aliases to .zshrc
+      lineinfile:
+        path: ~/.zshrc
+        line: "{{ item }}"
+      loop:
+        - 'source ~/.bash_aliases'
+        - 'set -o ignoreeof'
+        - "export EDITOR='vim'"
