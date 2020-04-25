@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source common.sh
+source ./common.sh
 
 sudo apt update
 
@@ -13,6 +13,7 @@ wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add
 sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
 sudo apt update
 sudo apt install code -y
+code --install-extension shan.code-settings-sync
 
 #zsh
 sudo apt install zsh -y
@@ -25,7 +26,7 @@ git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/theme
 
 #ansible and config files
 sudo apt install ansible -y
-ansible-playbook playbook.yml
+ansible-playbook ./playbook.yml
 
 #git
 git config --global user.email "levikleinm@gmail.com"
