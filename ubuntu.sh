@@ -5,7 +5,11 @@ source ./common.sh
 sudo apt update
 
 #utilities
-sudo apt install vim curl python3-pip -y
+sudo apt install \
+  vim \
+  curl \
+  python3-pip \
+  -y
 
 # vscode
 sudo apt install software-properties-common apt-transport-https wget -y
@@ -31,3 +35,18 @@ ansible-playbook ./playbook.yml
 #git
 git config --global user.email "levikleinm@gmail.com"
 git config --global user.name "Levi Klein Marifosque"
+
+#docker
+sudo apt-get install \
+    ca-certificates \
+    gnupg-agent \
+    software-properties-common \
+    -y
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io -y
