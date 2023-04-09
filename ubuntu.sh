@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -e
 
 function install_utilities()
 {
@@ -21,7 +21,6 @@ function install_zsh()
 
   sudo apt install zsh -y
   zsh --version
-  sudo chsh -s $(which zsh)
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
   #zsh theme
@@ -81,6 +80,10 @@ function main()
     install_vscode
     install_docker
   fi
+
+  # post install
+  ## set default shell to zsh
+  sudo chsh -s $(which zsh)
   
   echo ""
   echo "Done!"
